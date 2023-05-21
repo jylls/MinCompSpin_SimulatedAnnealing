@@ -16,6 +16,7 @@ int main(int argc, char **argv) {
     bool pload = false; // load partition
     bool rload = false;
     bool greedy = false;
+    bool anneal = true;
     string fname, pname;
     // ========================
 
@@ -59,6 +60,11 @@ int main(int argc, char **argv) {
     		greedy = true;
     	}
 
+        // turn annealing off (greedy only)
+        if (arg == "-s") {
+            anneal = false;
+        }
+
     	// maximum iterations
     	if (arg == "--max") {
     		max_iterations = stoi(argv[i+1]);
@@ -71,6 +77,9 @@ int main(int argc, char **argv) {
     		i++;
     	}
     }
+
+    // have to do something 
+    if (!greedy) {anneal = true;}
 
     cout << "- max iterations (stop): ";
     cout << max_iterations;
@@ -96,7 +105,10 @@ int main(int argc, char **argv) {
     }
 
     // main algorithm 
-    simulated_annealing(p_struct, max_iterations, max_no_improve);
+    if (anneal) {
+        simulated_annealing(p_struct, max_iterations, max_no_improve);
+    }
+    
 
     cout << "- current log-evidence (after SAA): " << p_struct.current_log_evidence << endl;
     cout << "- best log-evidence (after SAA):    " << p_struct.best_log_evidence << endl;

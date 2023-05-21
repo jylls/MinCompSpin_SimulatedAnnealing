@@ -38,8 +38,6 @@ void merge_partition(Partition &p_struct){
 
 }
 
-
-
 void split_partition(Partition &p_struct){
 
 	if (p_struct.nc == p_struct.n){return;} // can't split independent communities
@@ -90,7 +88,6 @@ void split_partition(Partition &p_struct){
 
 }
 
-
 void switch_partition(Partition &p_struct){
 
 	if (p_struct.nc <= 1){return;} // can't switch node to same community 
@@ -129,4 +126,3 @@ void switch_partition(Partition &p_struct){
 	}
 
 }
-
