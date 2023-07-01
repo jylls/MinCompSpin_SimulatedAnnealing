@@ -1,5 +1,12 @@
 #include "header.h"
 
+
+#include <ctime> // for chrono
+#include <ratio> // for chrono
+#include <chrono> // for chrono]
+
+using namespace std::chrono;
+
 int main(int argc, char **argv) {
 
 
@@ -99,9 +106,13 @@ int main(int argc, char **argv) {
     }
 
     if (greedy) {
+        auto start = chrono::system_clock::now();
         greedy_merging(p_struct);
         cout << "- current log-evidence (after GMA): " << p_struct.current_log_evidence << endl;
         cout << "- best log-evidence (after GMA):    " << p_struct.best_log_evidence << endl;
+        auto end = chrono::system_clock::now();
+        chrono::duration<double> elapsed = end - start;
+        cout << "- elapsed time      : " << elapsed.count() << "s" << endl;
     }
 
     // main algorithm 
